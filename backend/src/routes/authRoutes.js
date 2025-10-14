@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 
 const router = express.Router();
 
+// il token e' valido per 15 giorni
 const generateToken = (userId) => {
   return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "15d" });
 };
@@ -17,11 +18,15 @@ router.post("/register", async (req, res) => {
     }
 
     if (password.length < 6) {
-      return res.status(400).json({ message: "Password should be at least 6 characters long" });
+      return res
+        .status(400)
+        .json({ message: "Password should be at least 6 characters long" });
     }
 
     if (username.length < 3) {
-      return res.status(400).json({ message: "Username should be at least 3 characters long" });
+      return res
+        .status(400)
+        .json({ message: "Username should be at least 3 characters long" });
     }
 
     // check if user already exists
@@ -69,7 +74,8 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    if (!email || !password) return res.status(400).json({ message: "All fields are required" });
+    if (!email || !password)
+      return res.status(400).json({ message: "All fields are required" });
 
     // check if user exists
     const user = await User.findOne({ email });
@@ -77,7 +83,8 @@ router.post("/login", async (req, res) => {
 
     // check if password is correct
     const isPasswordCorrect = await user.comparePassword(password);
-    if (!isPasswordCorrect) return res.status(400).json({ message: "Invalid credentials" });
+    if (!isPasswordCorrect)
+      return res.status(400).json({ message: "Invalid credentials" });
 
     const token = generateToken(user._id);
 

@@ -1,6 +1,14 @@
-<h1 align="center">📚 BookWorm – Full‑Stack React Native App 🚀</h1>
+# BookWorm - Full Stack React Native App
 
-![Demo App](/mobile/assets/images/screenshot-for-readme.png)
+build del backend in render.com
+
+## Tech
+
+- **React Native**
+- **Dicebear.com** API ( to randomly generate users avatar images)
+- **Cloudinary**
+
+---
 
 ## 🎯 What You'll Build
 

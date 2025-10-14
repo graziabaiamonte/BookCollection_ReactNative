@@ -40,7 +40,7 @@ export default function Login() {
         {/* ILLUSTRATION */}
         <View style={styles.topIllustration}>
           <Image
-            source={require("../../assets/images/i.png")}
+            source={require("../../assets/images/i_retro.png")}
             style={styles.illustrationImage}
             resizeMode="contain"
           />
@@ -88,6 +88,8 @@ export default function Login() {
                   placeholderTextColor={COLORS.placeholderText}
                   value={password}
                   onChangeText={setPassword}
+
+                  // nasconde i caratteri della pasword se è true
                   secureTextEntry={!showPassword}
                 />
 

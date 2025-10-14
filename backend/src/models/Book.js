@@ -26,6 +26,8 @@ const bookSchema = new mongoose.Schema(
       required: true,
     },
   },
+
+  // per avere createdAt e updatedAt
   { timestamps: true }
 );
 
