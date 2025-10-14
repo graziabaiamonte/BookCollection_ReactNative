@@ -15,6 +15,7 @@ export default job;
 // CRON JOB EXPLANATION:
 // Cron jobs are scheduled tasks that run periodically at fixed intervals
 // we want to send 1 GET request for every 14 minutes
+// (infatti il piano gratuito di render.com prevede un ritardo di quasi un minuto o più in caso di inattività)
 
 // How to define a "Schedule"?
 // You define a schedule using a cron expression, which consists of 5 fields representing:
