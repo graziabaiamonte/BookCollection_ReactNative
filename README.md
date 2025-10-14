@@ -1,6 +1,6 @@
 # BookWorm - Full Stack React Native App
 
-Un'applicazione mobile per gestire e organizzare la tua collezione di libri preferiti. Aggiungi titoli, scrivi recensioni personali, valuta i tuoi libri e tieni traccia delle tue letture preferite.
+Applicazione mobile per gestire e organizzare la tua collezione di libri preferiti. Aggiungi titoli, scrivi recensioni personali, valuta i tuoi libri e tieni traccia delle tue letture preferite.
 
 ## Tech
 
