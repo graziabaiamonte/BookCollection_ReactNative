@@ -18,8 +18,8 @@ Un'applicazione mobile per gestire e organizzare la tua collezione di libri pref
 
 (build del backend in render.com)
 
-![ScreenHome](/mobile/assets/images/screen_01)
+![ScreenHome](./mobile/assets/images/screen_01.png)
 
-![ScreenHome](/mobile/assets/images/screen_02)
+![ScreenHome](./mobile/assets/images/screen_02.png)
 
-![ScreenHome](/mobile/assets/images/screen_03)
+![ScreenHome](./mobile/assets/images/screen_03.png)
