@@ -18,8 +18,4 @@ Applicazione mobile per gestire e organizzare la tua collezione di libri preferi
 
 (build del backend in render.com)
 
-![ScreenHome](./mobile/assets/images/screen_01.png)
-
-![ScreenHome](./mobile/assets/images/screen_02.png)
-
-![ScreenHome](./mobile/assets/images/screen_03.png)
+![ScreenHome](./mobile/assets/images/screen_readme.png)
