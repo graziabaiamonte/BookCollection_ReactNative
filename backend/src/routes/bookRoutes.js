@@ -13,9 +13,30 @@ router.post("/", protectRoute, async (req, res) => {
       return res.status(400).json({ message: "Please provide all fields" });
     }
 
-    // upload the image to cloudinary
-    const uploadResponse = await cloudinary.uploader.upload(image);
-    const imageUrl = uploadResponse.secure_url;
+    // debug context (avoid printing full base64)
+    console.log("POST /api/books - user:", req.user?._id?.toString());
+    console.log("POST /api/books - payload:", {
+      title,
+      captionLength: String(caption).length,
+      rating,
+      imagePrefix:
+        typeof image === "string" ? image.slice(0, 30) : typeof image,
+    });
+
+    let imageUrl = null;
+    try {
+      // upload the image to cloudinary
+      const uploadResponse = await cloudinary.uploader.upload(image);
+      imageUrl = uploadResponse.secure_url;
+    } catch (uploadError) {
+      const errMsg = uploadError?.message || String(uploadError);
+      console.error("Cloudinary upload error:", errMsg);
+      return res.status(400).json({
+        message:
+          "Image upload failed. Ensure CLOUDINARY_* env vars are set and image is a valid data URL.",
+        details: errMsg,
+      });
+    }
 
     // save to the database
     const newBook = new Book({
@@ -31,7 +52,7 @@ router.post("/", protectRoute, async (req, res) => {
     res.status(201).json(newBook);
   } catch (error) {
     console.log("Error creating book", error);
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: error.message || "Internal server error" });
   }
 });
 
@@ -40,8 +61,8 @@ router.get("/", protectRoute, async (req, res) => {
   // example call from react native - frontend
   // const response = await fetch("http://localhost:3000/api/books?page=1&limit=5");
   try {
-    const page = req.query.page || 1;
-    const limit = req.query.limit || 2;
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 2;
     const skip = (page - 1) * limit;
 
     const books = await Book.find()
@@ -87,7 +108,7 @@ router.delete("/:id", protectRoute, async (req, res) => {
       return res.status(401).json({ message: "Unauthorized" });
 
     // https://res.cloudinary.com/de1rm4uto/image/upload/v1741568358/qyup61vejflxxw8igvi0.png
-    // delete image from cloduinary as well
+    // delete image from cloudinary as well
     if (book.image && book.image.includes("cloudinary")) {
       try {
         const publicId = book.image.split("/").pop().split(".")[0];

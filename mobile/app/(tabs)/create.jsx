@@ -48,7 +48,7 @@ export default function Create() {
 
       // launch image library
       const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: "images",
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [4, 3],
         quality: 0.5, // lower quality for smaller base64
@@ -86,12 +86,8 @@ export default function Create() {
     try {
       setLoading(true);
 
-      // get file extension from URI or default to jpeg
-      const uriParts = image.split(".");
-      const fileType = uriParts[uriParts.length - 1];
-      const imageType = fileType ? `image/${fileType.toLowerCase()}` : "image/jpeg";
-
-      const imageDataUrl = `data:${imageType};base64,${imageBase64}`;
+      // force jpeg data URL to avoid HEIC/webp incompatibilities
+      const imageDataUrl = `data:image/jpeg;base64,${imageBase64}`;
 
       const response = await fetch(`${API_URL}/books`, {
         method: "POST",
@@ -102,7 +98,7 @@ export default function Create() {
         body: JSON.stringify({
           title,
           caption,
-          rating: rating.toString(),
+          rating: Number(rating),
           image: imageDataUrl,
         }),
       });

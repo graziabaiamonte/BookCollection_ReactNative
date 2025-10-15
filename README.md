@@ -16,4 +16,8 @@ Applicazione mobile per gestire e organizzare la tua collezione di libri preferi
 - **Dicebear.com** API ( to randomly generate users avatar images)
 - **Cloudinary** (Images Storage)
 
+iOS simulator preview
 ![ScreenHome](./mobile/assets/images/screen_readme.webp)
+
+Local preview (http://localhost:8081)
+![ScreenHome](./mobile/assets/images/inner.webp)
